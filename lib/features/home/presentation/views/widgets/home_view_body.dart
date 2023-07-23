@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/features/home/presentation/views/widgets/settings_tab.dart';
 
-class HomeViewBody extends StatelessWidget {
-  const HomeViewBody({Key? key}) : super(key: key);
+import 'list_tab.dart';
+
+class HomeViewBody extends StatefulWidget {
+  HomeViewBody({super.key});
+
+  @override
+  State<HomeViewBody> createState() => _HomeViewBodyState();
+}
+
+class _HomeViewBodyState extends State<HomeViewBody> {
+   int selectedIndex = 0;
+
+   List<Widget> tabs = [
+     ListTab(),  SettingsTab()
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +33,18 @@ class HomeViewBody extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
+
         shape: const CircularNotchedRectangle(),
         clipBehavior: Clip.antiAlias,
         notchMargin: 8,
         child: BottomNavigationBar(
+          currentIndex: selectedIndex,
+          onTap: (index){
+            selectedIndex = index;
+            setState(() {
+
+            });
+          },
           showSelectedLabels: false,
           showUnselectedLabels: false,
           items: const [
@@ -32,6 +54,7 @@ class HomeViewBody extends StatelessWidget {
           ],
         ),
       ),
+      body: tabs[selectedIndex],
     );
   }
 }

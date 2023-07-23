@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   go_router: ^9.0.0
+  table_calendar: ^3.0.9
   flutter:
     sdk: flutter
 
