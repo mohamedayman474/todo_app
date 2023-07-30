@@ -20,6 +20,7 @@ class MyThemeData{
     textTheme: const TextTheme(titleSmall: TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.bold),
     titleMedium: TextStyle(color: _primaryColorLight,fontSize: 18,fontWeight: FontWeight.bold),
     titleLarge: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),
+
     )
 
   );

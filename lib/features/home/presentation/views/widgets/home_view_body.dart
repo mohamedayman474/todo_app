@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/features/home/presentation/views/widgets/settings_tab.dart';
+import 'package:todo_app/features/home/presentation/views/widgets/settings/settings_tab.dart';
+import 'package:todo_app/features/home/presentation/views/widgets/show_add_todo_bottom_sheet.dart';
 
-import 'list_tab.dart';
+import 'List/list_tab.dart';
 
 class HomeViewBody extends StatefulWidget {
-  HomeViewBody({super.key});
+  const HomeViewBody({super.key});
 
   @override
   State<HomeViewBody> createState() => _HomeViewBodyState();
 }
 
 class _HomeViewBodyState extends State<HomeViewBody> {
-   int selectedIndex = 0;
+  int selectedIndex = 0;
 
-   List<Widget> tabs = [
-     ListTab(),  SettingsTab()
+  List<Widget> tabs = [
+    ListTab(), SettingsTab()
   ];
 
   @override
@@ -22,13 +23,20 @@ class _HomeViewBodyState extends State<HomeViewBody> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('To Do List'),
-        toolbarHeight: MediaQuery.of(context).size.height * 0.2,
+        toolbarHeight: MediaQuery
+            .of(context)
+            .size
+            .height * 0.2,
       ),
       floatingActionButton: FloatingActionButton(
         shape: const StadiumBorder(
             side: BorderSide(width: 4, color: Colors.white)),
-        backgroundColor: Theme.of(context).primaryColor,
-        onPressed: () {},
+        backgroundColor: Theme
+            .of(context)
+            .primaryColor,
+        onPressed: () {
+          showAddTodoBottomSheet(context);
+        },
         child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -39,7 +47,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
         notchMargin: 8,
         child: BottomNavigationBar(
           currentIndex: selectedIndex,
-          onTap: (index){
+          onTap: (index) {
             selectedIndex = index;
             setState(() {
 
@@ -58,3 +66,4 @@ class _HomeViewBodyState extends State<HomeViewBody> {
     );
   }
 }
+
