@@ -14,8 +14,8 @@ class ListTab extends StatefulWidget {
 }
 
 class _ListTabState extends State<ListTab> {
+  List<Todo> taskList=[];
   DateTime selectedDay = DateTime.now();
-
   DateTime focusedDay = DateTime.now();
 
   @override
@@ -26,8 +26,8 @@ class _ListTabState extends State<ListTab> {
         Container(
           color: Colors.white,
           child: TableCalendar(
-              firstDay: DateTime.now().subtract(Duration(days: 365)),
-              lastDay: DateTime.now().add(Duration(days: 365)),
+              firstDay: DateTime.now().subtract(const Duration(days: 365)),
+              lastDay: DateTime.now().add(const Duration(days: 365)),
               focusedDay: focusedDay,
               locale: provider.appLanguage,
               selectedDayPredicate: (day) {
@@ -35,9 +35,9 @@ class _ListTabState extends State<ListTab> {
               },
               onDaySelected: (selectedDay, focusedDay) {
                 setState(() {
-                  this.selectedDay = selectedDay;
-                  this.focusedDay =
-                      focusedDay; // update `_focusedDay` here as well
+                  this.selectedDay=selectedDay;
+                  this.focusedDay = focusedDay;
+
                 });
               },
               headerVisible: false,
@@ -68,7 +68,7 @@ class _ListTabState extends State<ListTab> {
                         Text(snapshot.error.toString()),
                         ElevatedButton(onPressed: (){
                           setState((){});
-                        }, child:  Text('Try Again',style: TextStyle(color: provider.mode== ThemeMode.light ? Colors.black : Colors.white),))
+                        }, child: const Text('Try Again'))
                       ],
                     ),
                   );
@@ -80,7 +80,7 @@ class _ListTabState extends State<ListTab> {
 
                 });
                 return
-                  taskList==null|| taskList.length==0?  Center(child: Text("No tasks for this date",style: TextStyle(color: provider.mode== ThemeMode.light ? Colors.black : Colors.white),))
+                  taskList==null|| taskList.length==0? const Center(child: Text("No tasks for this date"))
 
                       :ListView.builder(
                       itemCount: (taskList.length),
@@ -93,4 +93,14 @@ class _ListTabState extends State<ListTab> {
       ],
     );
   }
+  void refreshTodo(){
+    getTodoCollectionRef().where(
+        'dateTime',isEqualTo: selectedDay.millisecondsSinceEpoch).get().then((querySnapshotOfTodo) {
+      querySnapshotOfTodo.docs.map((document) {
+        return document.data();
+      }).toList();
+
+    });
+  }
+
 }

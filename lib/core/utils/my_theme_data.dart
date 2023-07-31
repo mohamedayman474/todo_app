@@ -7,6 +7,7 @@ class MyThemeData{
   static const Color _accentColorLight=Color(0xffDFECDB);
   static const Color _primaryColorDark= Color(0xff5D9CEC);
   static const Color _accentColorDark= Color(0xff060E1E);
+  static const Color greenColor= Color(0xff61E757);
 
 
   static ThemeData lightTheme=ThemeData(

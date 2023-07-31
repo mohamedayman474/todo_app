@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_app/core/utils/format_date.dart';
 import 'package:todo_app/core/utils/navigator.dart';
-
 import '../../view_model/Todo.dart';
 import '../../view_model/firebase_utils.dart';
 
@@ -22,6 +21,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
   DateTime selectedDate=DateTime.now();
  final formKey = GlobalKey<FormState>();
 
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,13 +29,13 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
       child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Spacer(),
+        const Spacer(),
       Text("Add New Task", textAlign: TextAlign.center,
       style: Theme
           .of(context)
           .textTheme
           .titleMedium?.copyWith(color: Colors.black),),
-        Spacer(),
+        const Spacer(),
         Form(
           key: formKey,
           child: Padding(
@@ -115,6 +115,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
        ElevatedButton(
            onPressed: (){
              addTask();
+
            },
           child: Text('Add task',style: Theme.of(context).textTheme.titleMedium
         ?.copyWith(color: Colors.white),)),

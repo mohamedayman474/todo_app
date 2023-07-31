@@ -16,33 +16,35 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   FirebaseFirestore.instance.settings =
-  const Settings(persistenceEnabled: true);
+      const Settings(persistenceEnabled: true);
 
   FirebaseFirestore.instance.settings =
-  const Settings(cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED);
+      const Settings(cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED);
   await FirebaseFirestore.instance.disableNetwork();
 
-  runApp(
-      ChangeNotifierProvider(
-    create: (_)=>AppConfigProvider(),
-      child:  MyApp()));
+  runApp(ChangeNotifierProvider(
+          create: (_) => AppConfigProvider(), child: MyApp(),
+      ),
+
+  );
 }
 
 class MyApp extends StatelessWidget {
   late AppConfigProvider provider;
-  late  SharedPreferences prefs;
-   MyApp({super.key});
+  late SharedPreferences prefs;
+
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    provider=Provider.of<AppConfigProvider>(context);
+    provider = Provider.of<AppConfigProvider>(context);
     initSharedPreference();
     return MaterialApp.router(
       localizationsDelegates: const [
         AppLocalizations.delegate,
-      GlobalMaterialLocalizations.delegate,
-      GlobalWidgetsLocalizations.delegate,
-      GlobalCupertinoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [
         Locale('en'), // English
@@ -55,18 +57,16 @@ class MyApp extends StatelessWidget {
       darkTheme: MyThemeData.darkTheme,
       themeMode: provider.mode,
       locale: Locale(provider.appLanguage),
-
     );
   }
 
-  void initSharedPreference() async{
+  void initSharedPreference() async {
     prefs = await SharedPreferences.getInstance();
     provider.setNewLanguage(prefs.getString('language') ?? 'en');
-    if(prefs.getString('theme')=='light'){
+    if (prefs.getString('theme') == 'light') {
       provider.setNewMode(ThemeMode.light);
-    }else if(prefs.getString('theme')=='dark'){
+    } else if (prefs.getString('theme') == 'dark') {
       provider.setNewMode(ThemeMode.dark);
     }
   }
 }
-

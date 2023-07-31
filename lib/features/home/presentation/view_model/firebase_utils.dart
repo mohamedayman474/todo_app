@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:todo_app/features/home/presentation/view_model/Todo.dart';
 
+
 CollectionReference<Todo> getTodoCollectionRef(){
   CollectionReference<Todo> todosCollection = FirebaseFirestore.instance.collection('todos').withConverter<Todo>(
       fromFirestore: (snapshot,_)=>Todo.fromJson(snapshot.data()!)
@@ -24,4 +25,8 @@ Future<void> deleteTodo(Todo todo ){
       .doc(todo.id)
       .delete();
 
+}
+ editIsDone(Todo todo){
+  CollectionReference todoRef=getTodoCollectionRef();
+     todoRef.doc(todo.id).update({'isDone': todo.isDone ? false : true});
 }
