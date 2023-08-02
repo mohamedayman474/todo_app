@@ -24,104 +24,118 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(12),
-      child: Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        const Spacer(),
-      Text("Add New Task", textAlign: TextAlign.center,
-      style: Theme
-          .of(context)
-          .textTheme
-          .titleMedium?.copyWith(color: Colors.black),),
-        const Spacer(),
-        Form(
-          key: formKey,
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: Column(
-              children: [
-                TextFormField(
-                  decoration:  const InputDecoration(
-                    labelText: "Title",
+    return SingleChildScrollView(
+      child: Container(
+        margin: const EdgeInsets.all(12),
+        child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: 10,),
+        Text("Add New Task", textAlign: TextAlign.center,
+        style: Theme
+            .of(context)
+            .textTheme
+            .titleMedium?.copyWith(color: Colors.black),),
 
+          Form(
+            key: formKey,
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.all(8),
+                    child: TextFormField(
+                      decoration:  const InputDecoration(
+                        labelText: "Title",
+
+                      ),
+                      onChanged: (text){
+                        title=text;
+                      },
+                      validator: (text){
+                        if(text==null || text.isEmpty){
+                          return "Enter title here";
+                        }
+                        return null;
+                      },
+
+                    ),
                   ),
-                  onChanged: (text){
-                    title=text;
-                  },
-                  validator: (text){
-                    if(text==null || text.isEmpty){
-                      return "Enter title here";
-                    }
-                    return null;
-                  },
-
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: "Description", ),
-                  onChanged: (text){
-                    description=text;
-                  },
-                  validator: (text){
-                    if(text==null || text.isEmpty){
-                      return "Enter description here";
-                    }
-                    return null;
-                  },
-                  maxLines: 3,
-                  minLines: 3,
+                  Container(
+                    margin: const EdgeInsets.all(8),
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        labelText: "Description", ),
+                      onChanged: (text){
+                        description=text;
+                      },
+                      validator: (text){
+                        if(text==null || text.isEmpty){
+                          return "Enter description here";
+                        }
+                        return null;
+                      },
+                      maxLines: 3,
+                      minLines: 3,
 
 
 
-                ),
+                    ),
+                  ),
 
-              ],
-            ),
-          ),
-        ),
-
-        Container(
-
-          margin: EdgeInsets.all(12),
-          child: Text("Select time", style: Theme
-              .of(context)
-              .textTheme
-              .titleLarge,),
-        ),
-        InkWell(
-          onTap: () {},
-
-          child: Opacity(
-            opacity: 0.6,
-            child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 15),
-              child: InkWell(
-                onTap: (){
-                  showMyDatePicker();
-
-                },
-                child: Text((formatDate('yyyy-MM-dd', selectedDate)), style: Theme
-                    .of(context)
-                    .textTheme
-                    .titleMedium?.copyWith(color: Colors.black),
-                  textAlign: TextAlign.center,),
+                ],
               ),
             ),
           ),
+
+          Container(
+
+            margin: const EdgeInsets.all(18),
+            child: Text("Select time", style: Theme
+                .of(context)
+                .textTheme
+                .titleLarge,),
+          ),
+          InkWell(
+            onTap: () {},
+
+            child: Opacity(
+              opacity: 0.6,
+              child: Container(
+                margin: const EdgeInsets.symmetric(vertical: 15),
+                child: InkWell(
+                  onTap: (){
+                    showMyDatePicker();
+
+                  },
+                  child: Text((formatDate('yyyy-MM-dd', selectedDate)), style: Theme
+                      .of(context)
+                      .textTheme
+                      .titleMedium?.copyWith(color: Colors.black),
+                    textAlign: TextAlign.center,),
+                ),
+              ),
+            ),
+          ),
+
+         ElevatedButton(
+             onPressed: (){
+               addTask();
+
+             },
+             style: ButtonStyle(
+                 backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor),
+                 shape: MaterialStateProperty.all(const RoundedRectangleBorder(
+                     borderRadius: BorderRadius.all(Radius.circular(25))
+                 ))
+             ),
+            child: Text('Add task',style: Theme.of(context).textTheme.titleMedium
+          ?.copyWith(color: Colors.white),)),
+
+
+        ]
         ),
-
-       ElevatedButton(
-           onPressed: (){
-             addTask();
-
-           },
-          child: Text('Add task',style: Theme.of(context).textTheme.titleMedium
-        ?.copyWith(color: Colors.white),)),
-
-
-      ]
       ),
     );
   }
@@ -129,7 +143,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
 
    if(formKey.currentState?.validate()==true){
      Todo todo=Todo(title: title, description: description,
-         dateTime: DateUtils.dateOnly(selectedDate).millisecondsSinceEpoch);
+         dateTime: DateUtils.dateOnly(selectedDate));
      addTaskToFirestore(todo).then((value) {
        hideLoadingDialog(context);
        showMessage(context, 'Task Added Successfully', 'Ok', () {

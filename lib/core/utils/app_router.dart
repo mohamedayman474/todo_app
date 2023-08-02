@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:todo_app/features/home/presentation/view_model/Todo.dart';
 import 'package:todo_app/features/home/presentation/views/edit_screen_view.dart';
 
 import '../../features/home/presentation/views/home_view.dart';
@@ -18,7 +19,7 @@ abstract class AppRouter {
     ),
     GoRoute(
       path: kEditScreenView,
-      builder: (context, state) =>  EditScreenView(),
+      builder: (context, state) =>   EditScreenView(todo: state.extra as Todo,),
     ),
   ]);
 }
