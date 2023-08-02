@@ -96,7 +96,7 @@ TodoItem(this.todo, {super.key});
                 child: todo.isDone ?
     Container(
     margin: const EdgeInsets.all(12),
-    child: const Text('Done!',style:TextStyle(color: MyThemeData.greenColor,fontSize: 22,fontWeight: FontWeight.bold )),
+    child:  Text(AppLocalizations.of(context)!.done,style:TextStyle(color: MyThemeData.greenColor,fontSize: 22,fontWeight: FontWeight.bold )),
     ):
                   Container(
                       decoration: BoxDecoration(

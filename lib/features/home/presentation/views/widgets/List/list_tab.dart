@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:todo_app/features/home/presentation/view_model/Todo.dart';
 import 'package:todo_app/features/home/presentation/views/widgets/List/todo_item.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../view_model/firebase_utils.dart';
 import '../../../view_model/provider/AppConfigProvider.dart';
 
@@ -68,7 +68,7 @@ class _ListTabState extends State<ListTab> {
                         Text(snapshot.error.toString()),
                         ElevatedButton(onPressed: (){
                           setState((){});
-                        }, child: const Text('Try Again'))
+                        }, child:  Text(AppLocalizations.of(context)!.try_again))
                       ],
                     ),
                   );
@@ -80,7 +80,8 @@ class _ListTabState extends State<ListTab> {
 
                 });
                 return
-                  taskList==null|| taskList.length==0? const Center(child: Text("No tasks for this date"))
+                  taskList==null|| taskList.length==0?  Center(child:
+                  Text(AppLocalizations.of(context)!.no_tasks_for_this_date))
 
                       :ListView.builder(
                       itemCount: (taskList.length),

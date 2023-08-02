@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/features/home/presentation/views/widgets/settings/settings_tab.dart';
 import 'package:todo_app/features/home/presentation/views/widgets/show_add_todo_bottom_sheet.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'List/list_tab.dart';
 
 class HomeViewBody extends StatefulWidget {
@@ -15,14 +15,14 @@ class _HomeViewBodyState extends State<HomeViewBody> {
   int selectedIndex = 0;
 
   List<Widget> tabs = [
-    ListTab(), SettingsTab()
+    ListTab(), const SettingsTab()
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('To Do List'),
+        title:  Text(AppLocalizations.of(context)!.to_do_list),
         toolbarHeight: MediaQuery
             .of(context)
             .size
@@ -55,10 +55,10 @@ class _HomeViewBodyState extends State<HomeViewBody> {
           },
           showSelectedLabels: false,
           showUnselectedLabels: false,
-          items: const [
-            BottomNavigationBarItem(label: 'list', icon: Icon(Icons.list)),
+          items:  [
+            BottomNavigationBarItem(label: AppLocalizations.of(context)!.list, icon: const Icon(Icons.list)),
             BottomNavigationBarItem(
-                label: 'settings', icon: Icon(Icons.settings)),
+                label: AppLocalizations.of(context)!.settings, icon: const Icon(Icons.settings)),
           ],
         ),
       ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/core/utils/navigator.dart';
 import 'package:todo_app/features/home/presentation/view_model/Todo.dart';
 import 'package:todo_app/features/home/presentation/view_model/firebase_utils.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../../core/utils/format_date.dart';
 
 class EditScreenViewBody extends StatefulWidget{
@@ -28,7 +28,7 @@ class _EditScreenViewBodyState extends State<EditScreenViewBody> {
 
     return Scaffold(
       appBar: AppBar(
-      title: const Text('To Do List'),
+      title: Text(AppLocalizations.of(context)!.to_do_list),
       toolbarHeight: MediaQuery
           .of(context)
           .size
@@ -55,7 +55,7 @@ class _EditScreenViewBodyState extends State<EditScreenViewBody> {
               child: Column(
                 children: [
                   const SizedBox(height: 10,),
-                  Text("Edit Task", textAlign: TextAlign.center,
+                  Text(AppLocalizations.of(context)!.edit_task, textAlign: TextAlign.center,
                     style: Theme
                         .of(context)
                         .textTheme
@@ -70,8 +70,8 @@ class _EditScreenViewBodyState extends State<EditScreenViewBody> {
                             margin: const EdgeInsets.all(8),
                             child: TextFormField(
                               initialValue: widget.todo.title,
-                              decoration:  const InputDecoration(
-                                labelText: "Title",
+                              decoration:   InputDecoration(
+                                labelText: AppLocalizations.of(context)!.title,
 
                               ),
                               onChanged: (text){
@@ -79,7 +79,7 @@ class _EditScreenViewBodyState extends State<EditScreenViewBody> {
                               },
                               validator: (text){
                                 if(text==null || text.isEmpty){
-                                  return "Enter title here";
+                                  return AppLocalizations.of(context)!.enter_title_here;
                                 }
                                 return null;
                               },
@@ -90,14 +90,14 @@ class _EditScreenViewBodyState extends State<EditScreenViewBody> {
                             margin: const EdgeInsets.all(8),
                             child: TextFormField(
                               initialValue: widget.todo.description,
-                              decoration: const InputDecoration(
-                                labelText: "Description", ),
+                              decoration:  InputDecoration(
+                                labelText: AppLocalizations.of(context)!.description, ),
                               onChanged: (text){
                                 widget.todo.description=text;
                               },
                               validator: (text){
                                 if(text==null || text.isEmpty){
-                                  return "Enter description here";
+                                  return AppLocalizations.of(context)!.enter_description_here;
                                 }
                                 return null;
                               },
@@ -117,29 +117,25 @@ class _EditScreenViewBodyState extends State<EditScreenViewBody> {
                     width: double.infinity,
 
                     margin: const EdgeInsets.all(20),
-                    child: Text("Select time", style: Theme
+                    child: Text(AppLocalizations.of(context)!.select_time, style: Theme
                         .of(context)
                         .textTheme
                         .titleLarge,),
                   ),
-                  InkWell(
-                    onTap: () {},
+                  Opacity(
+                    opacity: 0.6,
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(vertical: 15),
+                      child: InkWell(
+                        onTap: (){
+                          showMyDatePicker();
 
-                    child: Opacity(
-                      opacity: 0.6,
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(vertical: 15),
-                        child: InkWell(
-                          onTap: (){
-                            showMyDatePicker();
-
-                          },
-                          child: Text((formatDate('yyyy-MM-dd', widget.todo.dateTime)), style: Theme
-                              .of(context)
-                              .textTheme
-                              .titleMedium?.copyWith(color: Colors.black),
-                            textAlign: TextAlign.center,),
-                        ),
+                        },
+                        child: Text((formatDate('yyyy-MM-dd', widget.todo.dateTime)), style: Theme
+                            .of(context)
+                            .textTheme
+                            .titleMedium?.copyWith(color: Colors.black),
+                          textAlign: TextAlign.center,),
                       ),
                     ),
                   ),
@@ -151,6 +147,7 @@ class _EditScreenViewBodyState extends State<EditScreenViewBody> {
                       onPressed: (){
                         editTask();
                         hideLoadingDialog(context);
+
                       },
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor),
@@ -158,7 +155,7 @@ class _EditScreenViewBodyState extends State<EditScreenViewBody> {
                           borderRadius: BorderRadius.all(Radius.circular(25))
                         ))
                       ),
-                      child: Text('Save Changes',style: Theme.of(context).textTheme.titleMedium
+                      child: Text(AppLocalizations.of(context)!.save_changes,style: Theme.of(context).textTheme.titleMedium
                           ?.copyWith(color: Colors.white),)),
 
 
@@ -181,7 +178,6 @@ class _EditScreenViewBodyState extends State<EditScreenViewBody> {
       if (date != null) {
         widget.todo.dateTime = date;
         setState(() {
-
 
         });
       }

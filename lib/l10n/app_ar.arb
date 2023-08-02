@@ -3,7 +3,25 @@
      "mode": "الوضع",
      "light": "مضئ",
      "dark": "داكن",
-     "delete": "حذف"
+     "delete": "حذف",
+     "try_again": "حاول مره اخري",
+     "no_tasks_for_this_date" :"لا توجد مهام لهذا التاريخ",
+     "task_added_successfully" :"تمت إضافة المهمة بنجاح",
+     "ok":"موافق",
+     "error_can_not_add_task_please_try_again_later" :"خطأ لا يمكن إضافة مهمة يرجى المحاولة مرة أخرى لاحقا",
+     "add_task" :"اضافه ملاحظة",
+     "select_time":"حدد الوقت",
+     "enter_description_here":"ادخل وصفا هنا",
+     "enter_title_here":"ادخل عنوانا هنا",
+     "title" : "عنوان",
+     "description" :"وصف",
+     "add_new_task" : "اضافة ملاحظة جديدة",
+     "to_do_list":"ملاحظات",
+     "edit_task":"تعديل الملاحظة",
+     "save_changes":"حفظ التغيرات",
+     "list": "القائمة",
+     "settings":"الاعدادات",
+     "done" :"تمت!"
 
 
 }

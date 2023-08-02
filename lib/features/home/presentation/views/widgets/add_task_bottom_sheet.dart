@@ -4,7 +4,7 @@ import 'package:todo_app/core/utils/format_date.dart';
 import 'package:todo_app/core/utils/navigator.dart';
 import '../../view_model/Todo.dart';
 import '../../view_model/firebase_utils.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class AddTaskBottomSheet extends StatefulWidget {
   const  AddTaskBottomSheet({super.key});
 
@@ -31,7 +31,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const SizedBox(height: 10,),
-        Text("Add New Task", textAlign: TextAlign.center,
+        Text(AppLocalizations.of(context)!.add_new_task, textAlign: TextAlign.center,
         style: Theme
             .of(context)
             .textTheme
@@ -46,8 +46,8 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                   Container(
                     margin: const EdgeInsets.all(8),
                     child: TextFormField(
-                      decoration:  const InputDecoration(
-                        labelText: "Title",
+                      decoration:   InputDecoration(
+                        labelText: AppLocalizations.of(context)!.title,
 
                       ),
                       onChanged: (text){
@@ -55,7 +55,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                       },
                       validator: (text){
                         if(text==null || text.isEmpty){
-                          return "Enter title here";
+                          return AppLocalizations.of(context)!.enter_title_here;
                         }
                         return null;
                       },
@@ -65,14 +65,14 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                   Container(
                     margin: const EdgeInsets.all(8),
                     child: TextFormField(
-                      decoration: const InputDecoration(
-                        labelText: "Description", ),
+                      decoration:  InputDecoration(
+                        labelText: AppLocalizations.of(context)!.description, ),
                       onChanged: (text){
                         description=text;
                       },
                       validator: (text){
                         if(text==null || text.isEmpty){
-                          return "Enter description here";
+                          return AppLocalizations.of(context)!.enter_description_here;
                         }
                         return null;
                       },
@@ -92,29 +92,25 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
           Container(
 
             margin: const EdgeInsets.all(18),
-            child: Text("Select time", style: Theme
+            child: Text(AppLocalizations.of(context)!.select_time, style: Theme
                 .of(context)
                 .textTheme
                 .titleLarge,),
           ),
-          InkWell(
-            onTap: () {},
+          Opacity(
+            opacity: 0.6,
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 15),
+              child: InkWell(
+                onTap: (){
+                  showMyDatePicker();
 
-            child: Opacity(
-              opacity: 0.6,
-              child: Container(
-                margin: const EdgeInsets.symmetric(vertical: 15),
-                child: InkWell(
-                  onTap: (){
-                    showMyDatePicker();
-
-                  },
-                  child: Text((formatDate('yyyy-MM-dd', selectedDate)), style: Theme
-                      .of(context)
-                      .textTheme
-                      .titleMedium?.copyWith(color: Colors.black),
-                    textAlign: TextAlign.center,),
-                ),
+                },
+                child: Text((formatDate('yyyy-MM-dd', selectedDate)), style: Theme
+                    .of(context)
+                    .textTheme
+                    .titleMedium?.copyWith(color: Colors.black),
+                  textAlign: TextAlign.center,),
               ),
             ),
           ),
@@ -130,7 +126,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                      borderRadius: BorderRadius.all(Radius.circular(25))
                  ))
              ),
-            child: Text('Add task',style: Theme.of(context).textTheme.titleMedium
+            child: Text(AppLocalizations.of(context)!.add_task,style: Theme.of(context).textTheme.titleMedium
           ?.copyWith(color: Colors.white),)),
 
 
@@ -146,13 +142,12 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
          dateTime: DateUtils.dateOnly(selectedDate));
      addTaskToFirestore(todo).then((value) {
        hideLoadingDialog(context);
-       showMessage(context, 'Task Added Successfully', 'Ok', () {
+       showMessage(context, AppLocalizations.of(context)!.task_added_successfully, AppLocalizations.of(context)!.ok, () {
 
        });
      }).catchError((error){
        hideLoadingDialog(context);
-       showMessage(context, "Error can't add task "
-           "please try again later  ", 'Ok', () {
+       showMessage(context, AppLocalizations.of(context)!.error_can_not_add_task_please_try_again_later  , AppLocalizations.of(context)!.ok, () {
 
        });
      }).timeout(const Duration(milliseconds:500 ),onTimeout: (){
