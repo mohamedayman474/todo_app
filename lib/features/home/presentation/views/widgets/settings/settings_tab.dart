@@ -30,7 +30,7 @@ class _SettingsTabState extends State<SettingsTab> {
           },
           child: Container(
             padding: const EdgeInsets.all(12),
-            margin: EdgeInsets.all(16),
+            margin: const EdgeInsets.all(16),
             decoration: BoxDecoration(
                 color: Colors.white,
                 border: Border.all(color: Theme
