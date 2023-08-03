@@ -7,6 +7,7 @@ class MyThemeData{
   static const Color _accentColorLight=Color(0xffDFECDB);
   static const Color _primaryColorDark= Color(0xff5D9CEC);
   static const Color _accentColorDark= Color(0xff060E1E);
+  static const Color greenColor= Color(0xff61E757);
 
 
   static ThemeData lightTheme=ThemeData(
@@ -14,11 +15,13 @@ class MyThemeData{
     scaffoldBackgroundColor: _accentColorLight,
     appBarTheme: const AppBarTheme(elevation: 0,
         color: _primaryColorLight,
+
         titleTextStyle: TextStyle(color: Colors.white,
             fontSize: 22,fontWeight: FontWeight.bold)),
     textTheme: const TextTheme(titleSmall: TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.bold),
     titleMedium: TextStyle(color: _primaryColorLight,fontSize: 18,fontWeight: FontWeight.bold),
     titleLarge: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),
+
     )
 
   );

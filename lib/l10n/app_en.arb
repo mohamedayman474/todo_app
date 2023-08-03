@@ -1,0 +1,28 @@
+{
+    "language": "Language",
+    "mode": "Mode",
+    "light": "Light",
+    "dark": "Dark",
+    "delete": "Delete",
+    "try_again": "Try again",
+    "no_tasks_for_this_date" :"No tasks for this date",
+    "task_added_successfully" :"Task Added Successfully",
+    "ok":"Ok",
+    "error_can_not_add_task_please_try_again_later" :"Error can't add task please try again later",
+    "add_task" :"Add task",
+    "select_time":"Select time",
+    "enter_description_here":"Enter description here",
+    "enter_title_here":"Enter title here",
+    "title" : "Title",
+    "description" :"Description",
+    "add_new_task" : "Add New Task",
+    "to_do_list":"To Do List",
+    "edit_task":"Edit Task",
+    "save_changes":"Save Changes",
+    "list": "list",
+    "settings":"settings",
+    "done" :"Done!",
+    "there_was_an_error_Please_try_again":" There was an Error, Please try again"
+
+
+}
