@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/core/utils/format_date.dart';
 import 'package:todo_app/core/utils/navigator.dart';
 import '../../view_model/Todo.dart';
 import '../../view_model/firebase_utils.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../view_model/provider/AppConfigProvider.dart';
 class AddTaskBottomSheet extends StatefulWidget {
   const  AddTaskBottomSheet({super.key});
 
@@ -24,6 +27,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
+    AppConfigProvider provider = Provider.of(context);
     return SingleChildScrollView(
       child: Container(
         margin: const EdgeInsets.all(12),
@@ -35,7 +39,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
         style: Theme
             .of(context)
             .textTheme
-            .titleMedium?.copyWith(color: Colors.black),),
+            .titleMedium?.copyWith(color: provider.mode==ThemeMode.light ? Colors.black: Colors.white),),
 
           Form(
             key: formKey,
@@ -44,9 +48,15 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
               child: Column(
                 children: [
                   Container(
-                    margin: const EdgeInsets.all(8),
+                    margin:  const EdgeInsets.all(8),
                     child: TextFormField(
                       decoration:   InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                         borderSide: BorderSide(color :provider.mode==ThemeMode.light ? Colors.black: Colors.white)
+                       ),
+
+
+                        labelStyle: TextStyle(color:provider.mode==ThemeMode.light ? Colors.black: Colors.white ),
                         labelText: AppLocalizations.of(context)!.title,
 
                       ),
@@ -66,6 +76,10 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                     margin: const EdgeInsets.all(8),
                     child: TextFormField(
                       decoration:  InputDecoration(
+                        enabledBorder:  OutlineInputBorder(
+                            borderSide: BorderSide(color:provider.mode==ThemeMode.light ? Colors.black: Colors.white)
+                        ),
+                        labelStyle: TextStyle(color:provider.mode==ThemeMode.light ? Colors.black: Colors.white ),
                         labelText: AppLocalizations.of(context)!.description, ),
                       onChanged: (text){
                         description=text;
@@ -76,8 +90,8 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                         }
                         return null;
                       },
-                      maxLines: 3,
-                      minLines: 3,
+                      maxLines: 4,
+                      minLines: 4,
 
 
 
@@ -109,7 +123,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                 child: Text((formatDate('yyyy-MM-dd', selectedDate)), style: Theme
                     .of(context)
                     .textTheme
-                    .titleMedium?.copyWith(color: Colors.black),
+                    .titleMedium?.copyWith(color: provider.mode==ThemeMode.light ? Colors.black :Colors.white ),
                   textAlign: TextAlign.center,),
               ),
             ),

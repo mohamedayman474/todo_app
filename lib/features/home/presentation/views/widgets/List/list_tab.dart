@@ -24,6 +24,7 @@ class _ListTabState extends State<ListTab> {
     return Column(
       children: [
         Container(
+          margin: const EdgeInsets.only(bottom: 8),
           color: Colors.white,
           child: TableCalendar(
               firstDay: DateTime.now().subtract(const Duration(days: 365)),
@@ -65,10 +66,11 @@ class _ListTabState extends State<ListTab> {
                   return Center(
                     child: Column(
                       children: [
-                        Text(snapshot.error.toString()),
+                        Text(AppLocalizations.of(context)!.there_was_an_error_Please_try_again,style: TextStyle(color: provider.mode==ThemeMode.light? Colors.black:Colors.white,fontSize: 18)),
                         ElevatedButton(onPressed: (){
                           setState((){});
-                        }, child:  Text(AppLocalizations.of(context)!.try_again))
+                        }, child:  Text(AppLocalizations.of(context)!.try_again,
+                            style: TextStyle(color: provider.mode==ThemeMode.light? Colors.black:Colors.white,fontSize: 18)))
                       ],
                     ),
                   );
@@ -80,9 +82,10 @@ class _ListTabState extends State<ListTab> {
 
                 });
                 return
-                  taskList==null|| taskList.length==0?  Center(child:
-                  Text(AppLocalizations.of(context)!.no_tasks_for_this_date))
-
+                  taskList==null|| taskList.length==0?
+                  Center(child:
+                  Text(AppLocalizations.of(context)!.no_tasks_for_this_date,
+                    style: TextStyle(color: provider.mode==ThemeMode.light? Colors.black:Colors.white,fontSize: 18)))
                       :ListView.builder(
                       itemCount: (taskList.length),
                       itemBuilder: (context, index) {
@@ -94,14 +97,6 @@ class _ListTabState extends State<ListTab> {
       ],
     );
   }
-  void refreshTodo(){
-    getTodoCollectionRef().where(
-        'dateTime',isEqualTo: selectedDay.millisecondsSinceEpoch).get().then((querySnapshotOfTodo) {
-      querySnapshotOfTodo.docs.map((document) {
-        return document.data();
-      }).toList();
 
-    });
-  }
 
 }

@@ -32,6 +32,7 @@ TodoItem(this.todo, {super.key});
             onDeleteAction(context);
           },
           child: Container(
+
             margin: const EdgeInsets.symmetric(vertical: 8),
             height: MediaQuery.of(context).size.height*0.13,
             decoration: const BoxDecoration(
@@ -60,7 +61,7 @@ TodoItem(this.todo, {super.key});
           padding: const EdgeInsets.all(18),
           decoration: BoxDecoration(color: provider.mode == ThemeMode.light
           ? Colors.white
-              : const Color(0xff0c1940),
+              : const Color(0xff141922),
               borderRadius: BorderRadius.circular(12)
           ),
 
@@ -96,7 +97,7 @@ TodoItem(this.todo, {super.key});
                 child: todo.isDone ?
     Container(
     margin: const EdgeInsets.all(12),
-    child:  Text(AppLocalizations.of(context)!.done,style:TextStyle(color: MyThemeData.greenColor,fontSize: 22,fontWeight: FontWeight.bold )),
+    child:  Text(AppLocalizations.of(context)!.done,style:const TextStyle(color: MyThemeData.greenColor,fontSize: 22,fontWeight: FontWeight.bold )),
     ):
                   Container(
                       decoration: BoxDecoration(

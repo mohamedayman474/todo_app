@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/core/utils/navigator.dart';
 import '../../../view_model/provider/AppConfigProvider.dart';
 
 class LanguageBottomSheet extends StatefulWidget {
@@ -19,12 +20,14 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
         InkWell(
             onTap: (){
               provider.setNewLanguage('en');
+              hideLoadingDialog(context);
 
             },
             child: getMainView("English",provider.appLanguage=="en" )),
         InkWell(
             onTap: (){
               provider.setNewLanguage('ar');
+              hideLoadingDialog(context);
             },
             child: getMainView("العربية", provider.appLanguage=="ar"))
       ],

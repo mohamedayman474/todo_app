@@ -21,7 +21,8 @@
     "save_changes":"Save Changes",
     "list": "list",
     "settings":"settings",
-    "done" :"Done!"
+    "done" :"Done!",
+    "there_was_an_error_Please_try_again":" There was an Error, Please try again"
 
 
 }

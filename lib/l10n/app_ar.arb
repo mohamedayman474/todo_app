@@ -21,7 +21,8 @@
      "save_changes":"حفظ التغيرات",
      "list": "القائمة",
      "settings":"الاعدادات",
-     "done" :"تمت!"
+     "done" :"تمت!",
+     "there_was_an_error_Please_try_again":" هناك خطا , يرجي المحاولة مرة اخري"
 
 
 }

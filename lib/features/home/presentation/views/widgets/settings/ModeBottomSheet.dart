@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../../../../core/utils/navigator.dart';
 import '../../../view_model/provider/AppConfigProvider.dart';
 
 class ModeBottomSheet extends StatefulWidget {
@@ -21,12 +22,14 @@ class _ModeBottomSheetState extends State<ModeBottomSheet> {
         InkWell(
             onTap: (){
               provider.setNewMode(ThemeMode.light);
+              hideLoadingDialog(context);
             },
             child: getMainView(AppLocalizations.of(context)!.light,
                 provider.mode==ThemeMode.light )),
         InkWell(
             onTap: (){
               provider.setNewMode(ThemeMode.dark);
+              hideLoadingDialog(context);
             },
             child: getMainView(AppLocalizations.of(context)!.dark,
                 provider.mode==ThemeMode.dark))

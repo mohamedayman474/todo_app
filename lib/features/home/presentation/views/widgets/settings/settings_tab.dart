@@ -86,7 +86,7 @@ class _SettingsTabState extends State<SettingsTab> {
 
   void showLanguageBottomSheet() {
     showModalBottomSheet(context: context, builder: (context) {
-      return LanguageBottomSheet();
+      return const LanguageBottomSheet();
     });
   }
 
@@ -94,7 +94,7 @@ class _SettingsTabState extends State<SettingsTab> {
   void showModeBottomSheet() {
     showModalBottomSheet(context: context,
         builder: (context) {
-          return ModeBottomSheet();
+          return const ModeBottomSheet();
         });
   }
 }
